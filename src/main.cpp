@@ -13,10 +13,10 @@ using namespace cv;
 using namespace cv::ximgproc;
 
 Mat_<uchar> src;
-int k_ = 8;
+int k_ = 20;
 int blockSize_ = 11;
 int type_ = THRESH_BINARY;
-int method_ = BINARIZATION_NIBLACK;
+int method_ = BINARIZATION_WOLF;
 
 void on_trackbar(int, void*);
 void onMouse( int event, int x, int y, int flags, void* userdata );
@@ -33,11 +33,13 @@ int main(int argc, char** argv)
     src = imread(filename, IMREAD_GRAYSCALE);
     int width = src.cols/2;
     int height = src.rows/2;
+//    namedWindow("Source", WINDOW_AUTOSIZE);
     namedWindow("Source", WINDOW_NORMAL);
     resizeWindow("Source", width,height);
     setMouseCallback( "Source", onMouse, &src );
     imshow("Source", src);
 
+//    namedWindow("Niblack", WINDOW_AUTOSIZE);
     namedWindow("Niblack", WINDOW_NORMAL);
     resizeWindow("Niblack", width,height);
     setMouseCallback( "Niblack", onMouse, &src );
