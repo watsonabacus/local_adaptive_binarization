@@ -19,6 +19,7 @@ int type_ = THRESH_BINARY;
 int method_ = BINARIZATION_NIBLACK;
 
 void on_trackbar(int, void*);
+void onMouse( int event, int x, int y, int flags, void* userdata );
 
 int main(int argc, char** argv)
 {
@@ -30,9 +31,16 @@ int main(int argc, char** argv)
     }
     const char* filename = argv[1];
     src = imread(filename, IMREAD_GRAYSCALE);
+    int width = src.cols/2;
+    int height = src.rows/2;
+    namedWindow("Source", WINDOW_NORMAL);
+    resizeWindow("Source", width,height);
+    setMouseCallback( "Source", onMouse, &src );
     imshow("Source", src);
 
-    namedWindow("Niblack", WINDOW_AUTOSIZE);
+    namedWindow("Niblack", WINDOW_NORMAL);
+    resizeWindow("Niblack", width,height);
+    setMouseCallback( "Niblack", onMouse, &src );
     createTrackbar("k", "Niblack", &k_, 20, on_trackbar);
     createTrackbar("blockSize", "Niblack", &blockSize_, 30, on_trackbar);
     createTrackbar("method", "Niblack", &method_, 3, on_trackbar);
@@ -41,6 +49,15 @@ int main(int argc, char** argv)
     waitKey(0);
 
     return 0;
+}
+void onMouse( int event, int x, int y, int flags, void* userdata )
+{
+//    if( event != CV_EVENT_LBUTTONDOWN )
+//            return;
+    Mat_<uchar> *img = (Mat_<uchar> *)userdata;
+    Point pt = Point(x,y);
+    std::cout<<"x="<<pt.x<<"\t y="<<pt.y<<"\t value="<<int(img->at<uchar>(y, x))<<"\n";
+
 }
 
 void on_trackbar(int, void*)
