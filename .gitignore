@@ -3,5 +3,6 @@
 .settings/
 build/
 data/
+.pydevproject
 
 
