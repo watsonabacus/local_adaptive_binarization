@@ -4,5 +4,6 @@
 build/
 data/
 .pydevproject
+__pycache__/
 
 
