@@ -28,6 +28,7 @@ def niBlackThreshold( src,  maxValue = 255, binarizationtype = cv2.THRESH_BINARY
     sqmean = cv2.sqrBoxFilter(src, cv2.CV_32F, (blockSize,blockSize), src,
             (-1,-1), True, cv2.BORDER_REPLICATE);
     variance = sqmean - mean * mean;
+    variance[variance<0] = 0
     stddev = np.sqrt(variance);
   
     if binarizationMethod == BINARIZATION_METHOD.BINARIZATION_NIBLACK:
