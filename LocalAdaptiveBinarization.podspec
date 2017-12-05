@@ -91,7 +91,7 @@ a description
   #  Not including the public_header_files will make all headers public.
   #
 
-  s.source_files  = "src/niblack_thresholding.*"
+  s.source_files  = "src/niblack_thresholding.*", "src/precomp.hpp"
   s.exclude_files = "Classes/Exclude"
 
   # s.public_header_files = "Classes/**/*.h"
